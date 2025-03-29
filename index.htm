@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="style1.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div id="navbar">
+
+            <div class="nav-left">
+                <img id="logo" src="img/TestLogo.svg" alt="Logo">
+            </div>
+    
+            <div class="nav-links">
+                <a href="#" class="nav-item"><img src="img/home_FILL0_wght300_GRAD0_opsz24.png" alt=""> Overview</a>
+                <a href="#" class="nav-item active"><img src="img/group_FILL0_wght300_GRAD0_opsz24.png" alt=""> Patients</a>
+                <a href="#" class="nav-item"><img src="img/BirthIcon.png" alt=""> Schedule</a>
+                <a href="#" class="nav-item"><img src="img/chat_bubble_FILL0_wght300_GRAD0_opsz24.png" alt=""> Message</a>
+                <a href="#" class="nav-item"><img src="img/credit_card_FILL0_wght300_GRAD0_opsz24.png" alt=""> Transactions</a>
+            </div>
+
+            <div class="user-info">
+                <img class="profile-pic" src="img/senior-woman-doctor-and-portrait-smile-for-health-2023-11-27-05-18-16-utc.png" alt="Dr. Jose Simmons">
+                <div class="user-text">
+                    <span class="name">Dr. Jose Simmons</span>
+                    <span class="role">General Practitioner</span>
+                </div>
+                
+                <div class="settings">
+                    <img src="img/settings_FILL0_wght300_GRAD0_opsz24.svg" alt="Settings">
+                </div>
+            </div>
+        </div>
+
+
+    </nav>
+    <main>
+        <div class="people">
+            <span id="pp"><strong>Patients</strong><img src="img/search_FILL0_wght300_GRAD0_opsz24.svg" alt=""></span>
+        </div>
+
+        <div id="container">
+            <div id="diagnos">
+             <h3>Diagnosis History </h3> 
+             <canvas id="myChart"></canvas>
+
+                <div class="health-stats">
+                    <div class="stat-box">
+                        <h4>Respiratory Rate</h4>
+                        <p><strong>20 bpm</strong></p>
+                        <span>Normal</span>
+                    </div>
+            
+                    <div class="stat-box">
+                        <h4>Temperature</h4>
+                        <p><strong>98.6°F</strong></p>
+                        <span>Normal</span>
+                    </div>
+            
+                    <div class="stat-box">
+                        <h4>Heart Rate</h4>
+                        <p><strong>78 bpm</strong></p>
+                        <span>Lower than Average</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="list-container">
+                <div id="list">
+                    <strong>Diagnostic List</strong>
+                    <div id="prob"></div>
+                    <div id="desc"></div>
+                    <div id="stat"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div id="labex">
+            <div class="info">
+            </div>
+    
+            <div class="Lab-result">
+                <span class="header-text">Lab Results</span>
+                <div class="lab-result-container">
+                    
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="datajs.js"></script>
+    <script>
+ 
+        console.log(data);
+        
+        const labResultContainer = document.querySelector(".lab-result-container")
+        const people = document.querySelector('.people');
+        const info = document.querySelector('.info');
+
+
+        for (let i = 0; i < data.length; i++) {
+            people.innerHTML += ` 
+                <div onclick="getPersonalInfo(${i})" class="person">
+                    <img src="${data[i].profile_picture}" alt="">
+                    <div>
+                        <h5>${data[i].name}</h5>
+                        <span>${data[i].gender}, ${data[i].age}</span>
+                    </div>
+                </div>`;
+        }
+
+const diagnosticListSection = document.getElementById("list");
+
+function renderDiagnosticList(i) {
+  diagnosticListSection.innerHTML = "";
+  let person = data[i];
+  let diagnostics = person.diagnostic_list;
+
+  diagnosticListSection.innerHTML = `
+      <div class="section-header">
+        <h3>Diagnostic List</h3>
+      </div>
+      <div class="section-content">
+        <table class="diagnostic-table">
+          <thead>
+            <tr>
+              <th>Problem/Diagnosis</th>
+              <th>Description</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${diagnostics
+              .map(
+                (diagnostic) => `
+              <tr>
+                <td>${diagnostic.name}</td>
+                <td>${diagnostic.description}</td>
+                <td><span class="status-badge ${diagnostic.status}">${diagnostic.status}</span></td>
+              </tr>
+            `
+              )
+              .join("")}
+          </tbody>
+        </table>
+      </div>`;
+}
+
+getPersonalInfo(0)
+function getPersonalInfo(i) {
+  const person = data[i];
+
+  info.innerHTML = `
+      <div class="profile">
+          <img src="${person.profile_picture}" alt="">
+          <h5>${person.name}</h5>
+      </div>
+      <div class="detail">
+          <img src="img/BirthIcon.png" alt="">  
+          <span>Date of Birth:</span> ${person.date_of_birth}
+      </div>
+      <div class="detail">
+          <img src="img/FemaleIcon.svg" alt="">  
+          <span>Gender:</span> ${person.gender}
+      </div>
+      <div class="detail">
+          <img src="img/PhoneIcon.svg" alt="">  
+          <span>Contact Info:</span> ${person.phone_number}
+      </div>
+      <div class="detail">
+          <img src="img/PhoneIcon.svg" alt="">  
+          <span>Emergency Contacts:</span> ${person.emergency_contact}
+      </div>
+      <div class="detail">
+          <img src="img/InsuranceIcon.svg" alt="">  
+          <span>Insurance Provider:</span> ${person.insurance_type}
+      </div>
+      <div class="detail">
+          <button id="btn">Show all information</button>
+      </div>
+  `;
+  renderDiagnosticList(i);
+
+let systolicData = []
+let diastolicData = []
+let date = []
+data[i].diagnosis_history.forEach((element) => {
+    systolicData.push(element.blood_pressure.systolic.value)
+    diastolicData.push(element.blood_pressure.diastolic.value)
+    date.push(`${element.month.slice(0,3)}, ${element.year}`)
+})
+
+
+
+
+
+    const ctx = document.getElementById("myChart").getContext("2d");
+
+    if (window.myChartInstance) {
+        window.myChartInstance.destroy();
+    }
+    
+
+    
+        window.myChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: date, 
+            datasets: [
+                {
+                    label: 'Systolic',
+                    data: systolicData,
+                    borderColor: '#D63384',
+                    backgroundColor: '#D63384',
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#D63384',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2
+                },
+                {
+                    label: 'Diastolic',
+                    data: diastolicData,
+                    borderColor: '#6F42C1',
+                    backgroundColor: '#6F42C1',
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#6F42C1',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2
+                }
+            ]
+        },
+        options: {
+        }
+    });
+
+    labResultContainer.innerHTML = ""
+
+    data[i].lab_results.forEach((element) => {
+        
+    labResultContainer.innerHTML += `
+    <div class="lab-result-card">
+        <span class="lab-result-text">${element}</span>
+        <img src="./img/download.png" alt="">
+    </div>`
+})
+}
+
+
+    </script>
+</body>
+</html>
