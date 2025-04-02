@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,26 +15,26 @@
         <div id="navbar">
 
             <div class="nav-left">
-                <img id="logo" src="img/TestLogo.svg" alt="Logo">
+                <img id="logo" src="{% static 'img/TestLogo.svg' %}" alt="Logo">
             </div>
     
             <div class="nav-links">
-                <a href="#" class="nav-item"><img src="img/home_FILL0_wght300_GRAD0_opsz24.png" alt=""> Overview</a>
-                <a href="#" class="nav-item active"><img src="img/group_FILL0_wght300_GRAD0_opsz24.png" alt=""> Patients</a>
-                <a href="#" class="nav-item"><img src="img/BirthIcon.png" alt=""> Schedule</a>
-                <a href="#" class="nav-item"><img src="img/chat_bubble_FILL0_wght300_GRAD0_opsz24.png" alt=""> Message</a>
-                <a href="#" class="nav-item"><img src="img/credit_card_FILL0_wght300_GRAD0_opsz24.png" alt=""> Transactions</a>
+                <a href="#" class="nav-item"><img src="{% static 'img/home_FILL0_wght300_GRAD0_opsz24.png' %}" alt=""> Overview</a>
+                <a href="#" class="nav-item active"><img src="{% static 'img/group_FILL0_wght300_GRAD0_opsz24.png' %}" alt=""> Patients</a>
+                <a href="#" class="nav-item"><img src="{% static 'img/BirthIcon.png '%}" alt=""> Schedule</a>
+                <a href="#" class="nav-item"><img src="{% static 'img/chat_bubble_FILL0_wght300_GRAD0_opsz24.png' %}" alt=""> Message</a>
+                <a href="#" class="nav-item"><img src="{% static 'img/credit_card_FILL0_wght300_GRAD0_opsz24.png' %}" alt=""> Transactions</a>
             </div>
 
             <div class="user-info">
-                <img class="profile-pic" src="img/senior-woman-doctor-and-portrait-smile-for-health-2023-11-27-05-18-16-utc.png" alt="Dr. Jose Simmons">
+                <img class="profile-pic" src="{% static 'img/senior-woman-doctor-and-portrait-smile-for-health-2023-11-27-05-18-16-utc.png' %}" alt="Dr. Jose Simmons">
                 <div class="user-text">
                     <span class="name">Dr. Jose Simmons</span>
                     <span class="role">General Practitioner</span>
                 </div>
                 
                 <div class="settings">
-                    <img src="img/settings_FILL0_wght300_GRAD0_opsz24.svg" alt="Settings">
+                    <img src="{% static 'img/settings_FILL0_wght300_GRAD0_opsz24.svg' %}" alt="Settings">
                 </div>
             </div>
         </div>
@@ -42,7 +43,7 @@
     </nav>
     <main>
         <div class="people">
-            <span id="pp"><strong>Patients</strong><img src="img/search_FILL0_wght300_GRAD0_opsz24.svg" alt=""></span>
+            <span id="pp"><strong>Patients</strong><img src="{% static 'img/search_FILL0_wght300_GRAD0_opsz24.svg' %}" alt=""></span>
         </div>
 
         <div id="container">
@@ -99,7 +100,7 @@
 
     </main>
 
-    <script src="datajs.js"></script>
+    <script src="{% static 'js/datajs.js' %}"></script>
     <script>
  
         console.log(data);
@@ -167,23 +168,23 @@ function getPersonalInfo(i) {
           <h5>${person.name}</h5>
       </div>
       <div class="detail">
-          <img src="img/BirthIcon.png" alt="">  
+          <img src="{% static 'img/BirthIcon.png' %}" alt="">  
           <span>Date of Birth:</span> ${person.date_of_birth}
       </div>
       <div class="detail">
-          <img src="img/FemaleIcon.svg" alt="">  
+          <img src="{% static 'img/FemaleIcon.svg' %}" alt="">  
           <span>Gender:</span> ${person.gender}
       </div>
       <div class="detail">
-          <img src="img/PhoneIcon.svg" alt="">  
+          <img src="{% static 'img/PhoneIcon.svg'%}" alt="">  
           <span>Contact Info:</span> ${person.phone_number}
       </div>
       <div class="detail">
-          <img src="img/PhoneIcon.svg" alt="">  
+          <img src="{% static 'img/PhoneIcon.svg' %}" alt="">  
           <span>Emergency Contacts:</span> ${person.emergency_contact}
       </div>
       <div class="detail">
-          <img src="img/InsuranceIcon.svg" alt="">  
+          <img src="{% static 'img/InsuranceIcon.svg' %}" alt="">  
           <span>Insurance Provider:</span> ${person.insurance_type}
       </div>
       <div class="detail">
@@ -253,7 +254,7 @@ data[i].diagnosis_history.forEach((element) => {
     labResultContainer.innerHTML += `
     <div class="lab-result-card">
         <span class="lab-result-text">${element}</span>
-        <img src="./img/download.png" alt="">
+        <img src="{% static '/img/download.png' %}" alt="">
     </div>`
 })
 }
