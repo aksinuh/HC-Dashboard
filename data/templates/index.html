@@ -21,7 +21,7 @@
             <div class="nav-links">
                 <a href="#" class="nav-item"><img src="{% static 'img/home_FILL0_wght300_GRAD0_opsz24.png' %}" alt=""> Overview</a>
                 <a href="#" class="nav-item active"><img src="{% static 'img/group_FILL0_wght300_GRAD0_opsz24.png' %}" alt=""> Patients</a>
-                <a href="#" class="nav-item"><img src="{% static 'img/BirthIcon.png '%}" alt=""> Schedule</a>
+                <a href="#" class="nav-item"><img src="{% static 'img/BirthIcon.png' %}" alt=""> Schedule</a>
                 <a href="#" class="nav-item"><img src="{% static 'img/chat_bubble_FILL0_wght300_GRAD0_opsz24.png' %}" alt=""> Message</a>
                 <a href="#" class="nav-item"><img src="{% static 'img/credit_card_FILL0_wght300_GRAD0_opsz24.png' %}" alt=""> Transactions</a>
             </div>
@@ -102,9 +102,7 @@
 
     <script src="{% static 'js/datajs.js' %}"></script>
     <script>
- 
         console.log(data);
-        
         const labResultContainer = document.querySelector(".lab-result-container")
         const people = document.querySelector('.people');
         const info = document.querySelector('.info');
@@ -121,86 +119,86 @@
                 </div>`;
         }
 
-const diagnosticListSection = document.getElementById("list");
+    const diagnosticListSection = document.getElementById("list");
 
-function renderDiagnosticList(i) {
-  diagnosticListSection.innerHTML = "";
-  let person = data[i];
-  let diagnostics = person.diagnostic_list;
+    function renderDiagnosticList(i) {
+    diagnosticListSection.innerHTML = "";
+    let person = data[i];
+    let diagnostics = person.diagnostic_list;
 
-  diagnosticListSection.innerHTML = `
-      <div class="section-header">
-        <h3>Diagnostic List</h3>
-      </div>
-      <div class="section-content">
-        <table class="diagnostic-table">
-          <thead>
-            <tr>
-              <th>Problem/Diagnosis</th>
-              <th>Description</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${diagnostics
-              .map(
-                (diagnostic) => `
-              <tr>
-                <td>${diagnostic.name}</td>
-                <td>${diagnostic.description}</td>
-                <td><span class="status-badge ${diagnostic.status}">${diagnostic.status}</span></td>
-              </tr>
-            `
-              )
-              .join("")}
-          </tbody>
-        </table>
-      </div>`;
-}
+    diagnosticListSection.innerHTML = `
+        <div class="section-header">
+            <h3>Diagnostic List</h3>
+        </div>
+        <div class="section-content">
+            <table class="diagnostic-table">
+            <thead>
+                <tr>
+                <th>Problem/Diagnosis</th>
+                <th>Description</th>
+                <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${diagnostics
+                .map(
+                    (diagnostic) => `
+                <tr>
+                    <td>${diagnostic.name}</td>
+                    <td>${diagnostic.description}</td>
+                    <td><span class="status-badge ${diagnostic.status}">${diagnostic.status}</span></td>
+                </tr>
+                `
+                )
+                .join("")}
+            </tbody>
+            </table>
+        </div>`;
+    }
 
-getPersonalInfo(0)
-function getPersonalInfo(i) {
-  const person = data[i];
+    getPersonalInfo(0)
+    function getPersonalInfo(i) {
+    const person = data[i];
 
-  info.innerHTML = `
-      <div class="profile">
-          <img src="${person.profile_picture}" alt="">
-          <h5>${person.name}</h5>
-      </div>
-      <div class="detail">
-          <img src="{% static 'img/BirthIcon.png' %}" alt="">  
-          <span>Date of Birth:</span> ${person.date_of_birth}
-      </div>
-      <div class="detail">
-          <img src="{% static 'img/FemaleIcon.svg' %}" alt="">  
-          <span>Gender:</span> ${person.gender}
-      </div>
-      <div class="detail">
-          <img src="{% static 'img/PhoneIcon.svg'%}" alt="">  
-          <span>Contact Info:</span> ${person.phone_number}
-      </div>
-      <div class="detail">
-          <img src="{% static 'img/PhoneIcon.svg' %}" alt="">  
-          <span>Emergency Contacts:</span> ${person.emergency_contact}
-      </div>
-      <div class="detail">
-          <img src="{% static 'img/InsuranceIcon.svg' %}" alt="">  
-          <span>Insurance Provider:</span> ${person.insurance_type}
-      </div>
-      <div class="detail">
-          <button id="btn">Show all information</button>
-      </div>
-  `;
-  renderDiagnosticList(i);
+    info.innerHTML = `
+        <div class="profile">
+            <img src="${person.profile_picture}" alt="">
+            <h5>${person.name}</h5>
+        </div>
+        <div class="detail">
+            <img src="{% static 'img/BirthIcon.png' %}" alt="">  
+            <span>Date of Birth:</span> ${person.date_of_birth}
+        </div>
+        <div class="detail">
+            <img src="{% static 'img/FemaleIcon.svg' %}" alt="">  
+            <span>Gender:</span> ${person.gender}
+        </div>
+        <div class="detail">
+            <img src="{% static 'img/PhoneIcon.svg' %}" alt="">  
+            <span>Contact Info:</span> ${person.phone_number}
+        </div>
+        <div class="detail">
+            <img src="{% static 'img/PhoneIcon.svg' %}" alt="">  
+            <span>Emergency Contacts:</span> ${person.emergency_contact}
+        </div>
+        <div class="detail">
+            <img src="{% static 'img/InsuranceIcon.svg' %}" alt="">  
+            <span>Insurance Provider:</span> ${person.insurance_type}
+        </div>
+        <div class="detail">
+            <button id="btn">Show all information</button>
+        </div>
+    `;
+    renderDiagnosticList(i);
 
-let systolicData = []
-let diastolicData = []
-let date = []
-data[i].diagnosis_history.forEach((element) => {
-    systolicData.push(element.blood_pressure.systolic.value)
-    diastolicData.push(element.blood_pressure.diastolic.value)
-    date.push(`${element.month.slice(0,3)}, ${element.year}`)
-})
+    let systolicData = []
+    let diastolicData = []
+    let date = []
+    data[i].diagnosis_history.forEach((element) => {
+        systolicData.push(element.blood_pressure.systolic.value)
+        diastolicData.push(element.blood_pressure.diastolic.value)
+        date.push(`${element.month.slice(0,3)}, ${element.year}`)
+    })
 
 
 

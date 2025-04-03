@@ -31,7 +31,7 @@ class PatientsInfo(models.Model):
         
         
 class Diagnos(models.Model):
-    patient = models.ForeignKey(PatientsInfo, on_delete=models.CASCADE, verbose_name='patient')
+    patient = models.ForeignKey(PatientsInfo, on_delete=models.CASCADE, related_name='patient')
     name = models.CharField(max_length=150)
     description = models.TextField()
     status = models.CharField(max_length=150)
@@ -41,7 +41,7 @@ class Diagnos(models.Model):
         
         
 class LabResults(models.Model):
-    user = models.ForeignKey(PatientsInfo, on_delete=models.CASCADE, verbose_name="results")
+    user = models.ForeignKey(PatientsInfo, on_delete=models.CASCADE, related_name="user")
     result = models.FileField(upload_to='diaqnoz/')
     
 
@@ -52,7 +52,7 @@ class HealthRecord(models.Model):
         ('high', 'Higher than Average'),
     ]
     
-    patient = models.ForeignKey(PatientsInfo, on_delete=models.CASCADE, related_name='health_records')
+    patient = models.ForeignKey(PatientsInfo, on_delete=models.CASCADE, related_name ="healt_patient")
     month = models.CharField(max_length=20)
     year = models.PositiveIntegerField()
     
